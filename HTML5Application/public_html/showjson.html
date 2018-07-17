@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <link rel="stylesheet" href="styles1.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="pagecontent">
+            <div class="search">
+                <button id="searchbtn">Show json</button>
+            </div>
+            
+            <div id="js-result">
+                
+            </div>
+        </div>
+
+        <script>
+            var json = '{"type":"form","items":[{"type":"title","label":"Request a callback"},{"type":"input","label":"First name","id":"firstname"},{"type":"input","label":"Last name","id":"lastname"},{"type":"input","label":"Email","id":"email"},{"type":"input","label":"When is the best time to call","id":"timetocall"},{"type":"checkbox","label":"Consent","id":"agreement"}]}';
+            function showPopup(){
+                let jsonObj = JSON.parse(json);
+                renderForm(jsonObj);
+            }
+            
+            function renderForm(jsonObj) {
+                var resBlock = document.getElementById("js-result");
+                resBlock.innerHTML = "";
+                let standaloneElements = buildFormFromJson(jsonObj);
+                standaloneElements.forEach(function(item, standaloneElements) {
+                    resBlock.appendChild(item);
+                });                
+            }
+            function buildFormFromJson(jsonObj){
+                if (jsonObj !== null) {
+                    if (jsonObj.type !== undefined && jsonObj.type==="form") {
+                        var jsonItems = jsonObj.items;
+                        var nodes = jsonItems.map(function(item) {
+                            if ("type" in item) {
+                                let parentdiv = document.createElement("div");                                
+                                let nodeElement;
+                                if (item.type === "checkbox") {
+                                    nodeElement = document.createElement("input");
+                                    nodeElement.setAttribute("type", "checkbox");
+                                } else {
+                                    nodeElement = document.createElement(item.type);
+                                }
+                                for (x in item) {
+                                    switch(x) {
+                                        case "label" : {
+                                           let lab = document.createElement("label");
+                                           lab.setAttribute("for", item.type);
+                                           lab.appendChild(document.createTextNode(item[x]));
+                                           parentdiv.appendChild(lab);
+                                           break;                                            
+                                        }
+                                        case "type": break;
+                                        default: {
+                                             nodeElement.setAttribute(x, item[x]);
+                                             break;
+                                        }
+                                    }
+                                } 
+                                parentdiv.appendChild(nodeElement);
+                                return parentdiv;
+                            }
+                        });console.log(nodes);
+                    }
+                }
+                return nodes;
+            }
+            
+            
+            this.document.getElementById('searchbtn').onclick=function(e){
+                showPopup();
+            };
+
+        </script>
+    </body>
+</html>

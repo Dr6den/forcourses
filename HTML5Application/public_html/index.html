@@ -100,22 +100,20 @@ and open the template in the editor.
             </div>
         </div>
 
-        <script>            
-            this.document.getElementById('sea').onkeypress=function(e){
-                if(e.keyCode===13){
-                    let popup = document.getElementById("openModal");    
-                    popup.style.display = "block";
-                    popup.style.pointerEvents = "auto";
-                }
-            };
-            this.document.getElementById('searchbtn').onclick=function(e){
+        <script>   
+            function showPopup(){
                 let popup = document.getElementById("openModal");    
                 popup.style.display = "block";
                 popup.style.pointerEvents = "auto";
-            };
-    
-            function showPopup(e) {
             }
+            this.document.getElementById('sea').onkeypress=function(e){
+                if(e.keyCode===13){
+                    showPopup();
+                }
+            };
+            this.document.getElementById('searchbtn').onclick=function(e){
+                showPopup();
+            };
             
             function closePopup() {console.log("clo");
                 let popup = document.getElementById("openModal");    
