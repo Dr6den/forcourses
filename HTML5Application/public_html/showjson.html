@@ -48,14 +48,17 @@ and open the template in the editor.
                                 if (item.type === "checkbox") {
                                     nodeElement = document.createElement("input");
                                     nodeElement.setAttribute("type", "checkbox");
+                                } else if (item.type === "title") {
+                                    nodeElement = document.createElement("div");
+                                    nodeElement.setAttribute("id", item.type);
                                 } else {
                                     nodeElement = document.createElement(item.type);
                                 }
                                 for (x in item) {
                                     switch(x) {
                                         case "label" : {
-                                           let lab = document.createElement("label");
-                                           lab.setAttribute("for", item.type);
+                                           let lab = document.createElement("label");console.log(item.hasOwnProperty("id"));
+                                           lab.setAttribute("for", (!item.hasOwnProperty("id")) ? item["type"] : item["id"]);
                                            lab.appendChild(document.createTextNode(item[x]));
                                            parentdiv.appendChild(lab);
                                            break;                                            
