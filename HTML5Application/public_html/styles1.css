@@ -15,6 +15,7 @@ and open the template in the editor.
 .pagecontent div {
     margin-left: 20px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .pagecontent .search {
@@ -41,3 +42,33 @@ thead {
     background-color: mistyrose;
 }
 
+.modalDialog {
+    position: fixed;
+    display: none;
+    pointer-events: none;
+    top: -20px;
+    right: 0;
+    bottom: 0;
+    left: -20px;
+    background: rgba(0,0,0,0.8);
+    z-index: 2;
+}
+
+.popupContent label {
+    color: chartreuse;    
+}
+
+.popupContent div {
+    padding-left: 30px;
+    padding-top: 20px;
+    position: relative;
+}
+
+.popupContent input {
+    width: 98%;
+}
+
+.close {
+    background-color: chartreuse;
+    color: red;
+}
